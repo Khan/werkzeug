@@ -105,8 +105,8 @@ def _log(type, message, *args, **kwargs):
     """Log into the internal werkzeug logger."""
     global _logger
     if _logger is None:
-        import logging
-        _logger = logging.getLogger('werkzeug')
+        import logging, os
+        _logger = logging.getLogger('werkzeug [%s]' % os.getpid())
         # Only set up a default log handler if the
         # end-user application didn't set anything up.
         if not logging.root.handlers and _logger.level == logging.NOTSET:
